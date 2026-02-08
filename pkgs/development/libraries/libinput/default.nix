@@ -26,6 +26,7 @@
   nixosTests,
   wayland-scanner,
   udevCheckHook,
+  lua5_4,
 }:
 
 let
@@ -51,7 +52,7 @@ in
 
 stdenv.mkDerivation rec {
   pname = "libinput";
-  version = "1.29.2";
+  version = "1.30.901";
 
   outputs = [
     "bin"
@@ -64,12 +65,8 @@ stdenv.mkDerivation rec {
     owner = "libinput";
     repo = "libinput";
     rev = version;
-    hash = "sha256-oxDGUbZebxAmBd2j51qV9Jn8SXBjUX2NPRgkxbDz7Dk=";
+    hash = "sha256-Y7DFQb5g2GhemaHlMOA0DHct8vlCuovga7LUyn6CVc4=";
   };
-
-  patches = [
-    ./udev-absolute-path.patch
-  ];
 
   nativeBuildInputs = [
     pkg-config
@@ -94,6 +91,7 @@ stdenv.mkDerivation rec {
         setuptools
       ]
     ))
+    lua5_4
   ]
   ++ lib.optionals wacomSupport [
     libwacom
